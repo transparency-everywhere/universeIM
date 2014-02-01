@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>universeIM</title>
+
+    <!-- Bootstrap core CSS -->
+    <script src="cordova.js"></script> 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/CryptoJS/rollups/aes.js"></script>
+    <script src="js/CryptoJS/rollups/sha512.js"></script>
+    <script src="js/CryptoJS/rollups/md5.js"></script>
+    <script src="js/jsencrypt.min.js"></script>
+    
+    
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/functions.js"></script> 
+    
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+      <div class="container">
+          <div id="alter"></div>
+      </div>
+      <div id="loader">
+                        <div id="circularG" style="position: absolute;left: 50%;margin-left: -50px;top: 50%;margin-top: -50px;">
+                                <div id="circularG_1" class="circularG">
+                                </div>
+                                <div id="circularG_2" class="circularG">
+                                </div>
+                                <div id="circularG_3" class="circularG">
+                                </div>
+                                <div id="circularG_4" class="circularG">
+                                </div>
+                                <div id="circularG_5" class="circularG">
+                                </div>
+                                <div id="circularG_6" class="circularG">
+                                </div>
+                                <div id="circularG_7" class="circularG">
+                                </div>
+                                <div id="circularG_8" class="circularG">
+                                </div>
+                        </div> <!-- - See more at: http://cssload.net/#sthash.DdGahpKm.dpuf -->
+      </div>
+      <div id="offline">
+          
+          <div class="mainFrame" id="start" style="display:block;">
+              <div class="container">
+                  
+                <div id="login" class="startForm">
+                    <header>Login</header>
+                    <form id="loginForm">
+                        <table>
+                            <tr>
+                                <td style="padding-top: 20px;"><input type="text" id="username" placeholder="Username" autocorrect="off" autocapitalize="off"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="password" id="password" placeholder="Password"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top: 20px;">
+                                    <input type="submit" id="submitLogin" class="btn btn-success pull-left" value="Login">
+                                    <a href="#" class="btn btn-primary pull-right" id="openReg">Create Account</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="reg" class="startForm">
+                    <header>Registration</header>
+                    <form id="regForm">
+                        <table>
+                            <tr>
+                                <td><input type="text" id="regUsername" placeholder="Username" class="checkReg"><br /><span id="checkUsernameStatus"></span></td>
+                            </tr>
+                            <tr>
+                                <td><input type="password" id="regPassword" placeholder="Password" class="checkReg"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="password" id="regRepeatPassword" placeholder="Repeat Password"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="true" class="checkRegBox">&nbsp;I accept the <a href="#" onclick="$('#login').hide(); $('#reg').hide(); $('#terms').show();">terms</a>.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" id="submitReg" class="btn btn-success pull-left" value="Create Account">
+                                    <a href="#" class="btn btn-default" id="regBack">Back</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div id="regWait"></div>
+                </div>
+                <div id="waitWhileKey" class="startForm" style="display:none">
+                        <div id="circularG" style="margin-left: 65px;margin-top: 20px;">
+                                <div id="circularG_1" class="circularG">
+                                </div>
+                                <div id="circularG_2" class="circularG">
+                                </div>
+                                <div id="circularG_3" class="circularG">
+                                </div>
+                                <div id="circularG_4" class="circularG">
+                                </div>
+                                <div id="circularG_5" class="circularG">
+                                </div>
+                                <div id="circularG_6" class="circularG">
+                                </div>
+                                <div id="circularG_7" class="circularG">
+                                </div>
+                                <div id="circularG_8" class="circularG">
+                                </div>
+                        </div> <!-- - See more at: http://cssload.net/#sthash.DdGahpKm.dpuf -->
+                        <h3 style="line-height: 15px;font-size: 12px;text-align: center;">The universe is creating your account now, this may take some minutes</h3>
+                </div>
+                <div id="terms" class="startForm" style="display:none;">
+                    <header>Terms <span class="pull-right" onclick="$('#terms').hide(); $('#reg').show();" style="cursor:pointer;">×</span></header>
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>The terms need to be included</h3>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+          </div>
+          
+      </div>
+      <div id="online">
+          
+          <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="img/logo.png" alt="logo" id="logo"/></a>
+                <ul class="nav navbar-nav" style="margin: 0">
+                  <li class="active pull-left" id="buddylistNav"><a href="#" title="Show Buddylist" onclick="showBuddylist();"><span class="glyphicon glyphicon-user"></span></a></li>
+                  <li class="pull-left" id="overviewNav"><a href="#" title="Show Buddylist" onclick="showOverview();"><span class="glyphicon glyphicon-list"></span><span id="unseenMessages"></span></a></li>
+                  <li class="pull-left" id="logoutNav"><a href="#contact" title="logout" onclick="logout()"><span class="glyphicon glyphicon-off"></span></a></li>
+                  
+                </ul>
+              </div>
+                
+                <ul class="nav navbar-nav navbar-right" style="float:right!important">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" style="color: #FFFFFF;"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active" ><a><input type="checkbox" name="storeMessageKeys" id="storeMessageKeys" value="true" onchange="updateConfig('storeMessageKeys', $('#storeMessageKeys').is(':checked'));"/>&nbsp;Store message keys</a></li>
+                        <li><a href="#" onclick="deleteAllStoredKeys();">Delete all stored keys</a></li>
+                    </ul>
+                  </li>
+                </ul>
+            </div>
+          </div>
+          
+          <div class="container">
+                <div class="mainFrame" id="buddylistFrame">
+                    <form id="searchForm" onsubmit="return false;">
+                        <input type="text" id="search" placeholder="search">
+                    </form>
+                    <ul id="searchResult"></ul>
+                    <ul id="openRequests"></ul>
+                    <ul class="buddylist" id="onlineList"></ul>
+                    <ul class="buddylist" id="offlineList"></ul>
+                </div>
+                <div class="mainFrame" id="chatOverviewFrame">
+                    <ul id="chatOverview"></ul>
+                </div>
+                <div id="chatWindows"></div>
+          </div>
+          
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  </body>
+</html>
